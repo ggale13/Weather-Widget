@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'}
+    span.s1 {font: 12.0px Helvetica}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Weather Widget&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: Roboto, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: transparent; /* make background transparent */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white; /* change text color if needed */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px; /* add padding for spacing */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#weather {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 24px; /* font size for weather information */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="weather"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Loading weather...</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p3"><span class="s1"><span class="Apple-converted-space">        </span>const apiKey = ‘</span>f0cdca0ce016f8d05cab47fa156f375a<span class="s1">’</span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const city = ‘’Victoria’; // Replace with your desired city</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const units = 'metric'; // 'metric' for Celsius, 'imperial' for Fahrenheit</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const weatherDiv = document.getElementById('weather');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function getWeather() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&amp;appid=${apiKey}&amp;units=${units}`)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.then(response =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (!response.ok) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>throw new Error('City not found');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return response.json();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.then(data =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const temperature = data.main.temp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const weatherDescription = data.weather[0].description;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>weatherDiv.innerHTML = `Temperature: ${temperature}°C&lt;br&gt;Description: ${weatherDescription}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.catch(error =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>weatherDiv.innerHTML = 'Error retrieving weather data.';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.error(error);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>getWeather(); // Retrieve weather data when the page loads</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
